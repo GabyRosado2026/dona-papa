@@ -1,0 +1,363 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Doña Papa — Dueña</title>
+<link rel="manifest" href="manifest-dueno.json">
+<meta name="theme-color" content="#35704F">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Doña Papa">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+  :root{
+    --verde:#35704F;
+    --verde-linea:#E2D6BC;
+    --mantequilla:#EFC04E;
+    --tomate:#D2503C;
+    --crema:#FAF1DF;
+    --cafe:#2E2419;
+    --fondo:#FAF1DF;
+    --panel:#FFFFFF;
+    --panel-alto:#F4EAD5;
+    --texto:#2E2419;
+    --texto-suave:#7A6A55;
+    --display:"Trebuchet MS","Segoe UI",Tahoma,sans-serif;
+    --body:"Segoe UI",Roboto,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{background:var(--fondo);color:var(--texto);font-family:var(--body);
+    font-size:16px;line-height:1.4;padding-bottom:env(safe-area-inset-bottom)}
+  button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:none;cursor:pointer}
+
+  .app{max-width:560px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+
+  .top{background:var(--verde);padding:13px 16px;display:flex;align-items:center;gap:12px;
+    position:sticky;top:0;z-index:10}
+  .top img{width:38px;height:38px;border-radius:9px;flex:none}
+  .top .marca{font-family:var(--display);font-weight:700;text-transform:uppercase;
+    letter-spacing:.04em;font-size:15px;line-height:1;color:var(--mantequilla)}
+  .top .sub{font-size:11px;color:#BFD6C6;margin-top:4px;text-transform:uppercase;
+    letter-spacing:.14em;font-family:var(--display)}
+  .conex{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:10px;
+    font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;color:#BFD6C6}
+  .punto{width:9px;height:9px;border-radius:50%;background:var(--tomate);flex:none}
+  .punto.on{background:var(--mantequilla)}
+
+  main{flex:1;padding:18px 16px 40px;display:flex;flex-direction:column;gap:26px}
+  section{display:flex;flex-direction:column;gap:12px}
+  h2{font-family:var(--display);font-size:13px;text-transform:uppercase;letter-spacing:.16em;
+    color:var(--texto-suave);margin:0}
+  .nota{font-size:13px;color:var(--texto-suave);line-height:1.5;margin:0}
+  .nota b{color:var(--texto);font-family:var(--display)}
+
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .kpi{background:var(--panel);border:1px solid var(--verde-linea);border-radius:15px;padding:15px}
+  .kpi .l{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;
+    font-size:10.5px;color:var(--texto-suave)}
+  .kpi .v{font-family:var(--display);font-size:29px;font-weight:700;line-height:1.05;
+    margin-top:6px;font-variant-numeric:tabular-nums}
+  .kpi.gana{background:var(--verde);border-color:var(--verde)}
+  .kpi.gana .l{color:#BFD6C6}
+  .kpi.gana .v{color:var(--mantequilla)}
+
+  .tbl{background:var(--panel);border:1px solid var(--verde-linea);border-radius:15px;overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:10px;
+    color:var(--texto-suave);text-align:left;padding:10px;font-weight:400}
+  td{padding:11px 10px;border-top:1px solid var(--verde-linea)}
+  .r{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--display)}
+  .gan{color:var(--verde);font-weight:700}
+
+  .invfila{display:flex;align-items:center;gap:12px;padding:12px 0;
+    border-bottom:1px solid var(--verde-linea)}
+  .invfila:last-child{border-bottom:0}
+  .inv{background:var(--panel);border:1px solid var(--verde-linea);border-radius:15px;padding:4px 16px}
+  .invfila .nm{font-size:15px;min-width:86px}
+  .barra{flex:1;height:9px;background:var(--panel-alto);border-radius:99px;overflow:hidden}
+  .barra i{display:block;height:100%;background:var(--verde);border-radius:99px}
+  .barra i.bajo{background:var(--mantequilla)}
+  .barra i.critico{background:var(--tomate)}
+  .invfila .q{font-family:var(--display);font-variant-numeric:tabular-nums;font-size:16px;
+    min-width:72px;text-align:right}
+  .invfila .q s{text-decoration:none;color:var(--texto-suave);font-size:12px}
+
+  .dia{background:var(--panel);border:1px solid var(--verde-linea);border-radius:15px;
+    padding:14px;display:flex;align-items:center;gap:14px}
+  .dia .f{font-family:var(--display);font-size:14.5px}
+  .dia .f s{display:block;text-decoration:none;color:var(--texto-suave);font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.09em;margin-top:4px}
+  .dia .m{margin-left:auto;text-align:right}
+  .dia .m b{font-family:var(--display);font-size:21px;color:var(--verde);
+    font-variant-numeric:tabular-nums;display:block;line-height:1}
+  .dia .m s{text-decoration:none;font-size:11px;color:var(--texto-suave)}
+
+  .btn{border-radius:13px;padding:15px;font-family:var(--display);font-weight:700;
+    text-transform:uppercase;letter-spacing:.11em;font-size:12.5px;text-align:center}
+  .btn.verde{background:var(--verde);color:#fff}
+  .btn.gris{background:var(--panel);color:var(--texto-suave);border:1px solid var(--verde-linea)}
+  .dos{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
+  .vacio{background:var(--panel);border:1px dashed var(--verde-linea);border-radius:15px;
+    padding:30px 18px;text-align:center;color:var(--texto-suave);font-size:14px}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);
+    background:var(--verde);color:#fff;padding:13px 22px;border-radius:99px;
+    font-family:var(--display);font-size:15px;box-shadow:0 8px 26px rgba(46,36,25,.35);
+    opacity:0;transition:.25s;pointer-events:none;z-index:50}
+  .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="app">
+  <header class="top">
+    <img src="icon-192.png" alt="">
+    <div>
+      <div class="marca">Doña Papa</div>
+      <div class="sub">Solo para la dueña</div>
+    </div>
+    <div class="conex"><span class="punto" id="punto"></span><span id="txtConexion">…</span></div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Hoy</h2>
+      <div class="kpis">
+        <div class="kpi gana"><div class="l">Ganancia</div><div class="v" id="kUtil">$0.00</div></div>
+        <div class="kpi"><div class="l">Vendido</div><div class="v" id="kVentas">$0.00</div></div>
+        <div class="kpi"><div class="l">Clientes</div><div class="v" id="kClientes">0</div></div>
+        <div class="kpi"><div class="l">Ticket promedio</div><div class="v" id="kTicket">$0.00</div></div>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Producto</th><th class="r">Cant.</th><th class="r">Vendido</th><th class="r">Deja</th></tr></thead>
+          <tbody id="tblHoy"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Inventario ahora</h2>
+      <div class="inv" id="inv"></div>
+      <p class="nota">Lo carga la cocina desde su pantalla. Aquí solo lo miras.</p>
+    </section>
+
+    <section>
+      <h2>Jornadas anteriores</h2>
+      <div class="kpis" id="acumulado"></div>
+      <div id="hist" style="display:flex;flex-direction:column;gap:11px"></div>
+    </section>
+
+    <section>
+      <h2>Respaldo</h2>
+      <p class="nota">Todo se guarda en la nube y persiste. Aun así, guarda un respaldo al final de cada mes: es un archivo que puedes abrir en Excel o mandarte por WhatsApp.</p>
+      <div class="dos">
+        <button class="btn gris" id="btnTexto">Copiar resumen</button>
+        <button class="btn verde" id="btnCsv">Descargar historial</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="sync.js"></script>
+<script>
+"use strict";
+
+/* ============================================================
+   Costos y precios — esta tabla vive SOLO aquí.
+   La caja no la tiene, así que quien atiende no puede ver
+   cuánto deja cada venta.
+   Si cambian los precios de tus insumos, actualiza los costos.
+   ============================================================ */
+const PRODUCTOS = [
+  { id:"personal", nombre:"Personal",   precio:1.25, costo:0.74 },
+  { id:"dona",     nombre:"De la Doña", precio:2.00, costo:1.35 },
+  { id:"familiar", nombre:"Familiar",   precio:3.50, costo:2.04 },
+  { id:"hotdog",   nombre:"Hotdog",     precio:1.50, costo:0.78 },
+  { id:"cola",     nombre:"Gaseosa",    precio:0.50, costo:0.21 }
+];
+
+const $ = s => document.querySelector(s);
+const money = n => "$" + (Math.round(n*100)/100).toFixed(2);
+const prod = id => PRODUCTOS.find(p => p.id === id);
+const margen = id => { const p = prod(id); return p ? p.precio - p.costo : 0; };
+
+let historialActual = [];
+
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove("on"), 2000);
+}
+
+/* ---------------- hoy ---------------- */
+function pintarVentas(lista){
+  const total = lista.reduce((s,v) => s + v.total, 0);
+  let util = 0;
+  const porProd = {};
+  lista.forEach(v => v.items.forEach(({id,q}) => {
+    porProd[id] = (porProd[id]||0) + q;
+    util += margen(id) * q;
+  }));
+
+  $("#kUtil").textContent     = money(util);
+  $("#kVentas").textContent   = money(total);
+  $("#kClientes").textContent = lista.length;
+  $("#kTicket").textContent   = money(lista.length ? total/lista.length : 0);
+
+  const tb = $("#tblHoy");
+  tb.innerHTML = "";
+  PRODUCTOS.forEach(p => {
+    const q = porProd[p.id] || 0;
+    if(!q) return;
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>"+p.nombre+"</td>" +
+      '<td class="r">'+q+"</td>" +
+      '<td class="r">'+money(p.precio*q)+"</td>" +
+      '<td class="r gan">'+money(margen(p.id)*q)+"</td>";
+    tb.appendChild(tr);
+  });
+  if(!tb.children.length){
+    tb.innerHTML = '<tr><td colspan="4" style="color:var(--texto-suave);text-align:center;padding:24px">Todavía no hay ventas hoy</td></tr>';
+  }
+}
+
+/* ---------------- inventario ---------------- */
+function pintarInventario(inv){
+  const cont = $("#inv");
+  cont.innerHTML = "";
+  INSUMOS.forEach(ins => {
+    const hay = inv[ins.id] || 0;
+    const pct = Math.max(0, Math.min(100, (hay/ins.ref)*100));
+    const clase = pct < 15 ? "critico" : pct < 35 ? "bajo" : "";
+    const f = document.createElement("div");
+    f.className = "invfila";
+    f.innerHTML = '<span class="nm">'+ins.nombre+'</span>' +
+      '<span class="barra"><i class="'+clase+'" style="width:'+pct+'%"></i></span>' +
+      '<span class="q">'+(Math.round(hay*10)/10)+' <s>'+ins.corto+'</s></span>';
+    cont.appendChild(f);
+  });
+}
+
+/* ---------------- historial ---------------- */
+function utilidadDe(j){
+  let u = 0;
+  for(const [id,q] of Object.entries(j.porProd || {})) u += margen(id)*q;
+  return u;
+}
+
+function pintarHistorial(lista){
+  historialActual = lista;
+  const cont = $("#hist");
+  const acum = $("#acumulado");
+  cont.innerHTML = "";
+
+  if(!lista.length){
+    acum.innerHTML = "";
+    cont.innerHTML = '<div class="vacio">Todavía no hay jornadas cerradas.<br>Aparecen aquí cuando la caja cierra el día.</div>';
+    return;
+  }
+
+  const totU = lista.reduce((s,j) => s + utilidadDe(j), 0);
+  const totV = lista.reduce((s,j) => s + j.total, 0);
+  acum.innerHTML =
+    '<div class="kpi gana"><div class="l">Ganado en total</div><div class="v">'+money(totU)+'</div></div>' +
+    '<div class="kpi"><div class="l">Vendido en total</div><div class="v">'+money(totV)+'</div></div>';
+
+  lista.forEach(j => {
+    const dif = j.diferencia;
+    const nota = dif === null || dif === undefined ? "sin cuadre"
+      : Math.abs(dif) < 0.01 ? "caja cuadrada"
+      : (dif < 0 ? "faltaron "+money(-dif) : "sobraron "+money(dif));
+    const el = document.createElement("div");
+    el.className = "dia";
+    el.innerHTML =
+      '<div class="f">'+j.etiqueta+'<s>'+j.clientes+' clientes · ticket '+money(j.ticket)+' · '+nota+'</s></div>' +
+      '<div class="m"><b>'+money(utilidadDe(j))+'</b><s>de '+money(j.total)+' vendidos</s></div>';
+    cont.appendChild(el);
+  });
+}
+
+/* ---------------- conexión ---------------- */
+function pintarConexion(e){
+  const p = $("#punto"), t = $("#txtConexion");
+  if(e.modo === "nube"){
+    p.classList.toggle("on", e.conectado);
+    t.textContent = e.conectado ? "En línea" : (e.texto || "Sin conexión");
+  } else {
+    p.classList.add("on");
+    t.textContent = "Modo local";
+  }
+}
+
+/* ---------------- respaldo ---------------- */
+function resumenTexto(){
+  if(!historialActual.length) return null;
+  let txt = "DOÑA PAPA — Resumen de jornadas\n\n";
+  historialActual.forEach(j => {
+    txt += j.etiqueta + " (" + j.fecha + ")\n";
+    txt += "  Vendido: " + money(j.total) + "   Ganancia: " + money(utilidadDe(j)) + "\n";
+    txt += "  Clientes: " + j.clientes + "   Ticket: " + money(j.ticket) + "\n";
+    PRODUCTOS.forEach(p => { if(j.porProd && j.porProd[p.id]) txt += "  - "+p.nombre+": "+j.porProd[p.id]+"\n"; });
+    txt += "\n";
+  });
+  return txt;
+}
+
+function copiarTexto(){
+  const t = resumenTexto();
+  if(!t){ toast("Todavía no hay historial"); return; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(() => toast("Copiado, pégalo donde quieras"));
+  } else {
+    toast("Tu navegador no permite copiar");
+  }
+}
+
+function descargarCsv(){
+  if(!historialActual.length){ toast("Todavía no hay historial"); return; }
+  const cols = ["fecha","dia","clientes","vendido","ganancia","ticket","efectivo","diferencia"]
+    .concat(PRODUCTOS.map(p => p.nombre));
+  const filas = [cols.join(";")];
+
+  historialActual.forEach(j => {
+    const f = [
+      j.fecha, j.etiqueta, j.clientes,
+      (Math.round(j.total*100)/100).toFixed(2),
+      (Math.round(utilidadDe(j)*100)/100).toFixed(2),
+      (Math.round(j.ticket*100)/100).toFixed(2),
+      j.caja === null || j.caja === undefined ? "" : j.caja.toFixed(2),
+      j.diferencia === null || j.diferencia === undefined ? "" : j.diferencia.toFixed(2)
+    ].concat(PRODUCTOS.map(p => (j.porProd && j.porProd[p.id]) || 0));
+    filas.push(f.join(";"));
+  });
+
+  const blob = new Blob(["﻿" + filas.join("\n")], { type:"text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "dona-papa-historial-" + new Date().toISOString().slice(0,10) + ".csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast("Descargado");
+}
+
+$("#btnTexto").addEventListener("click", copiarTexto);
+$("#btnCsv").addEventListener("click", descargarCsv);
+
+Sync.iniciar({
+  onVentas:     pintarVentas,
+  onInventario: pintarInventario,
+  onHistorial:  pintarHistorial,
+  onEstado:     pintarConexion
+});
+
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>
