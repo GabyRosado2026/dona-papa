@@ -374,13 +374,9 @@ const PRODUCTOS = [
   { id:"cola",     nombre:"Gaseosa",     precio:0.50, costo:0.21, receta:{ cola:1 } }
 ];
 
-const INSUMOS = [
-  { id:"papa",      nombre:"Papa",      unidad:"libras",  ref:20 },
-  { id:"salchicha", nombre:"Salchicha", unidad:"unidades",ref:40 },
-  { id:"pan",       nombre:"Pan",       unidad:"unidades",ref:12 },
-  { id:"cola",      nombre:"Gaseosas",  unidad:"unidades",ref:24 },
-  { id:"tarrina",   nombre:"Tarrinas",  unidad:"unidades",ref:50 }
-];
+/* La lista de insumos vive en sync.js, para que la caja y la cocina
+   usen exactamente la misma y no se desincronicen al cambiarla. */
+const INSUMOS = window.INSUMOS;
 
 const LLAVE = "donapapa_ventas_v1";
 
