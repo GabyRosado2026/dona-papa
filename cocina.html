@@ -1,0 +1,425 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Doña Papa — Cocina</title>
+<link rel="manifest" href="manifest-cocina.json">
+<meta name="theme-color" content="#2E2419">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cocina">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+  /* La cocina se lee de lejos, con las manos ocupadas y grasosas:
+     todo grande, un solo botón por orden, fondo oscuro para que
+     el color del estado sea lo único que salte a la vista. */
+  :root{
+    --verde:#35704F;
+    --verde-vivo:#4E9A6C;
+    --mantequilla:#EFC04E;
+    --tomate:#D2503C;
+    --crema:#FAF1DF;
+    --cafe:#2E2419;
+    --fondo:#1E1810;
+    --panel:#2A2218;
+    --linea:#3D3324;
+    --texto-suave:#B2A48D;
+    --display:"Trebuchet MS","Segoe UI",Tahoma,sans-serif;
+    --body:"Segoe UI",Roboto,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{background:var(--fondo);color:var(--crema);font-family:var(--body);
+    font-size:17px;line-height:1.35;padding-bottom:env(safe-area-inset-bottom)}
+  button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer}
+
+  .app{max-width:820px;margin:0 auto;padding-bottom:40px}
+
+  header{background:var(--cafe);border-bottom:2px solid var(--linea);padding:14px 18px;
+    display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:5}
+  header img{width:42px;height:42px;border-radius:9px;flex:none}
+  header .t .m{font-family:var(--display);font-weight:700;text-transform:uppercase;
+    letter-spacing:.05em;font-size:17px;line-height:1;color:var(--mantequilla)}
+  header .t .s{font-size:11.5px;color:var(--texto-suave);text-transform:uppercase;
+    letter-spacing:.14em;font-family:var(--display);margin-top:4px}
+  .conexion{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:11px;
+    font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;
+    color:var(--texto-suave);text-align:right}
+  .punto{width:10px;height:10px;border-radius:50%;background:var(--tomate);flex:none}
+  .punto.on{background:var(--verde-vivo)}
+
+  main{padding:18px}
+  h2{font-family:var(--display);font-size:13px;text-transform:uppercase;letter-spacing:.18em;
+    color:var(--texto-suave);margin:0 0 12px}
+  .grupo{margin-bottom:30px}
+
+  .vacio{border:2px dashed var(--linea);border-radius:16px;padding:44px 20px;text-align:center;
+    color:var(--texto-suave);font-size:16px}
+
+  .ordenes{display:grid;gap:14px}
+  @media(min-width:640px){ .ordenes{grid-template-columns:1fr 1fr} }
+
+  .orden{background:var(--panel);border:2px solid var(--linea);border-radius:18px;
+    overflow:hidden;display:flex;flex-direction:column}
+  .orden.urgente{border-color:var(--tomate)}
+  .orden.listo{border-color:var(--verde-vivo);opacity:.75}
+
+  .oh{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:2px solid var(--linea)}
+  .oh .n{font-family:var(--display);font-weight:700;font-size:31px;line-height:1;
+    color:var(--mantequilla);font-variant-numeric:tabular-nums}
+  .oh .hora{font-size:12px;color:var(--texto-suave);font-family:var(--display);
+    text-transform:uppercase;letter-spacing:.1em}
+  .oh .reloj{margin-left:auto;font-family:var(--display);font-size:21px;
+    font-variant-numeric:tabular-nums;color:var(--texto-suave)}
+  .oh .reloj.urgente{color:var(--tomate)}
+
+  .items{padding:12px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .item{display:flex;align-items:baseline;gap:12px}
+  .item .q{font-family:var(--display);font-weight:700;font-size:25px;color:var(--crema);
+    min-width:38px}
+  .item .nm{font-family:var(--display);font-size:22px;line-height:1.1}
+
+  .btn-listo{background:var(--verde);color:#fff;font-family:var(--display);font-weight:700;
+    text-transform:uppercase;letter-spacing:.12em;font-size:19px;padding:22px 16px;
+    transition:transform .06s}
+  .btn-listo:active{transform:scale(.98);background:var(--verde-vivo)}
+
+  .btn-entregado{background:transparent;color:var(--texto-suave);font-family:var(--display);
+    text-transform:uppercase;letter-spacing:.12em;font-size:13px;padding:15px 16px;
+    border-top:2px solid var(--linea)}
+
+  .aviso{background:rgba(239,192,78,.13);border:1px solid rgba(239,192,78,.4);
+    border-radius:14px;padding:14px 16px;font-size:14.5px;margin-bottom:18px;
+    color:var(--crema)}
+  .aviso b{font-family:var(--display)}
+
+  .pie{text-align:center;color:var(--texto-suave);font-size:12.5px;padding:0 18px;line-height:1.6}
+
+  /* ---------------- inventario ---------------- */
+  .inv{background:var(--panel);border:2px solid var(--linea);border-radius:16px;padding:4px 16px}
+  .invfila{display:flex;align-items:center;gap:14px;padding:14px 0;
+    border-bottom:1px solid var(--linea)}
+  .invfila:last-child{border-bottom:0}
+  .invfila .nm{font-size:17px;min-width:92px}
+  .barra{flex:1;height:10px;background:#1E1810;border-radius:99px;overflow:hidden}
+  .barra i{display:block;height:100%;background:var(--verde-vivo);border-radius:99px;
+    transition:width .3s}
+  .barra i.bajo{background:var(--mantequilla)}
+  .barra i.critico{background:var(--tomate)}
+  .invfila .q{font-family:var(--display);font-variant-numeric:tabular-nums;font-size:20px;
+    min-width:82px;text-align:right}
+  .invfila .q s{text-decoration:none;color:var(--texto-suave);font-size:13px}
+
+  .alcance{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+  .alc{background:var(--panel);border:2px solid var(--linea);border-radius:14px;padding:12px 14px}
+  .alc .n{font-family:var(--display);font-size:25px;font-weight:700;color:var(--mantequilla);
+    font-variant-numeric:tabular-nums;line-height:1}
+  .alc .l{font-size:12px;color:var(--texto-suave);font-family:var(--display);
+    text-transform:uppercase;letter-spacing:.08em;margin-top:5px}
+
+  .ayuda{font-size:14px;color:var(--texto-suave);line-height:1.5;margin:0 0 14px;max-width:60ch}
+  .ayuda b{color:var(--crema);font-family:var(--display)}
+
+  .campos{display:flex;flex-direction:column;gap:10px}
+  .campo{display:flex;align-items:center;gap:14px;background:var(--panel);
+    border:2px solid var(--linea);border-radius:14px;padding:12px 16px}
+  .campo label{flex:1;font-size:17px}
+  .campo .u{font-size:12px;color:var(--texto-suave);font-family:var(--display);
+    text-transform:uppercase;letter-spacing:.08em}
+  .campo input{width:104px;background:#1E1810;border:2px solid var(--linea);border-radius:11px;
+    padding:13px;color:var(--crema);text-align:right;font-family:var(--display);font-size:20px}
+
+  .btn-cargar{width:100%;margin-top:14px;background:var(--verde);color:#fff;
+    font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+    font-size:17px;padding:20px;border-radius:14px}
+  .btn-cargar:active{background:var(--verde-vivo)}
+  .btn-corregir{width:100%;margin-top:10px;background:transparent;color:var(--texto-suave);
+    font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:12px;
+    padding:14px;border-radius:12px;border:2px solid var(--linea)}
+
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(90px);
+    background:var(--verde);color:#fff;padding:15px 26px;border-radius:99px;
+    font-family:var(--display);font-size:16px;box-shadow:0 10px 30px rgba(0,0,0,.6);
+    opacity:0;transition:.25s;pointer-events:none;z-index:50;white-space:nowrap}
+  .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="app">
+  <header>
+    <img src="icon-192.png" alt="">
+    <div class="t">
+      <div class="m">Cocina</div>
+      <div class="s">Doña Papa</div>
+    </div>
+    <div class="conexion">
+      <span class="punto" id="punto"></span>
+      <span id="txtConexion">…</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="aviso" id="avisoModo" hidden></div>
+
+    <div class="grupo">
+      <h2>Por preparar</h2>
+      <div class="ordenes" id="pendientes"></div>
+    </div>
+
+    <div class="grupo">
+      <h2>Listas, esperando que las lleven</h2>
+      <div class="ordenes" id="listas"></div>
+    </div>
+
+    <div class="grupo" id="stock">
+      <h2>Lo que hay</h2>
+      <div class="inv" id="invActual"></div>
+
+      <div class="alcance" id="alcance"></div>
+
+      <h2 style="margin-top:26px">Cargar lo de hoy</h2>
+      <p class="ayuda">Escribe lo que trajiste. <b>Se suma</b> a lo que ya quedaba. Cada venta lo descuenta sola, y la caja ve lo mismo que tú al instante.</p>
+      <div class="campos" id="campos"></div>
+      <button class="btn-cargar" id="btnCargar">Cargar al inventario</button>
+      <button class="btn-corregir" id="btnCorregir">Corregir: poner el inventario en cero</button>
+    </div>
+
+    <p class="pie">Esta pantalla se actualiza sola.<br>Deja el teléfono apoyado y con la pantalla encendida.</p>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="sync.js"></script>
+<script>
+"use strict";
+
+const $ = s => document.querySelector(s);
+const MINUTOS_URGENTE = 8;
+
+let ultimoConteo = 0;
+let ordenesActuales = [];
+
+/* ---------- sonido de aviso, sin archivos externos ---------- */
+let audioCtx = null;
+function pitido(){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const t = audioCtx.currentTime;
+    [880, 1320].forEach((hz, i) => {
+      const osc = audioCtx.createOscillator();
+      const vol = audioCtx.createGain();
+      osc.type = "sine"; osc.frequency.value = hz;
+      vol.gain.setValueAtTime(0.0001, t + i*0.18);
+      vol.gain.exponentialRampToValueAtTime(0.28, t + i*0.18 + 0.02);
+      vol.gain.exponentialRampToValueAtTime(0.0001, t + i*0.18 + 0.16);
+      osc.connect(vol); vol.connect(audioCtx.destination);
+      osc.start(t + i*0.18); osc.stop(t + i*0.18 + 0.2);
+    });
+  }catch(e){}
+  if(navigator.vibrate) navigator.vibrate([120, 60, 120]);
+}
+// los navegadores exigen un toque antes de dejar sonar nada
+document.addEventListener("click", function despertar(){
+  try{ (audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)()).resume(); }catch(e){}
+  document.removeEventListener("click", despertar);
+}, {once:true});
+
+/* ---------- pintar ---------- */
+function minutosDesde(ts){ return Math.floor((Date.now() - ts) / 60000); }
+
+function tarjeta(o){
+  const min = minutosDesde(o.creada);
+  const urgente = o.estado === "pendiente" && min >= MINUTOS_URGENTE;
+
+  const el = document.createElement("div");
+  el.className = "orden" + (urgente ? " urgente" : "") + (o.estado === "listo" ? " listo" : "");
+
+  const hora = new Date(o.creada);
+  const hh = hora.getHours() + ":" + String(hora.getMinutes()).padStart(2,"0");
+
+  let items = "";
+  o.items.forEach(i => {
+    items += '<div class="item"><span class="q">'+i.q+'×</span><span class="nm">'+i.nombre+'</span></div>';
+  });
+
+  el.innerHTML =
+    '<div class="oh">' +
+      '<span class="n">#'+o.numero+'</span>' +
+      '<span class="hora">'+hh+'</span>' +
+      '<span class="reloj'+(urgente?" urgente":"")+'">'+min+' min</span>' +
+    '</div>' +
+    '<div class="items">'+items+'</div>';
+
+  if(o.estado === "pendiente"){
+    const b = document.createElement("button");
+    b.className = "btn-listo";
+    b.textContent = "Ya está";
+    b.addEventListener("click", () => Sync.marcar(o.id, "listo"));
+    el.appendChild(b);
+  } else {
+    const b = document.createElement("button");
+    b.className = "btn-entregado";
+    b.textContent = "Ya se la llevaron";
+    b.addEventListener("click", () => Sync.marcar(o.id, "entregado"));
+    el.appendChild(b);
+  }
+  return el;
+}
+
+function pintar(lista){
+  ordenesActuales = lista;
+  const pend = lista.filter(o => o.estado === "pendiente");
+  const list = lista.filter(o => o.estado === "listo");
+
+  // sonar solo cuando ENTRA una orden nueva
+  if(pend.length > ultimoConteo && ultimoConteo !== 0) pitido();
+  ultimoConteo = pend.length;
+
+  const cp = $("#pendientes"); cp.innerHTML = "";
+  if(!pend.length){
+    cp.innerHTML = '<div class="vacio">No hay órdenes pendientes.<br>Todo al día.</div>';
+  } else {
+    pend.forEach(o => cp.appendChild(tarjeta(o)));
+  }
+
+  const cl = $("#listas"); cl.innerHTML = "";
+  if(!list.length){
+    cl.innerHTML = '<div class="vacio">Nada esperando.</div>';
+  } else {
+    list.forEach(o => cl.appendChild(tarjeta(o)));
+  }
+
+  document.title = pend.length ? "("+pend.length+") Cocina — Doña Papa" : "Cocina — Doña Papa";
+}
+
+function pintarEstado(e){
+  const p = $("#punto"), t = $("#txtConexion");
+  if(e.modo === "nube"){
+    p.classList.toggle("on", e.conectado);
+    t.textContent = e.conectado ? "En línea" : (e.texto || "Sin conexión");
+  } else {
+    p.classList.add("on");
+    t.textContent = "Modo local";
+    const a = $("#avisoModo");
+    a.hidden = false;
+    a.innerHTML = '<b>Modo local.</b> Esta pantalla solo ve las órdenes de la caja si están abiertas en el <b>mismo</b> teléfono o computadora. Para que funcione entre dos teléfonos hay que conectar la nube — mira COMO-CONECTAR-LA-NUBE.md';
+  }
+}
+
+/* ---------- inventario ---------- */
+/* Lo que rinde cada porción. Debe coincidir con la caja. */
+const RECETAS = [
+  { nombre:"Personal",   receta:{ papa:0.33, salchicha:1, tarrina:1 } },
+  { nombre:"De la Doña", receta:{ papa:0.66, salchicha:2, tarrina:1 } },
+  { nombre:"Hotdog",     receta:{ papa:0.09, salchicha:1, pan:1 } }
+];
+
+function pintarCampos(){
+  const cont = $("#campos");
+  if(cont.children.length) return;
+  INSUMOS.forEach(ins => {
+    const d = document.createElement("div");
+    d.className = "campo";
+    d.innerHTML =
+      '<label for="add-'+ins.id+'">'+ins.nombre+'</label>' +
+      '<span class="u">'+ins.unidad+'</span>' +
+      '<input id="add-'+ins.id+'" type="number" inputmode="decimal" min="0" step="0.5" placeholder="0">';
+    cont.appendChild(d);
+  });
+}
+
+function pintarInventario(inv){
+  const cont = $("#invActual");
+  cont.innerHTML = "";
+  INSUMOS.forEach(ins => {
+    const hay = inv[ins.id] || 0;
+    const pct = Math.max(0, Math.min(100, (hay / ins.ref) * 100));
+    const clase = pct < 15 ? "critico" : pct < 35 ? "bajo" : "";
+    const f = document.createElement("div");
+    f.className = "invfila";
+    f.innerHTML =
+      '<span class="nm">'+ins.nombre+'</span>' +
+      '<span class="barra"><i class="'+clase+'" style="width:'+pct+'%"></i></span>' +
+      '<span class="q">'+(Math.round(hay*10)/10)+' <s>'+ins.corto+'</s></span>';
+    cont.appendChild(f);
+  });
+
+  const alc = $("#alcance");
+  alc.innerHTML = "";
+  const hay = Sync.hayInventario();
+  RECETAS.forEach(r => {
+    const d = document.createElement("div");
+    d.className = "alc";
+    d.innerHTML = '<div class="n">'+(hay ? Sync.alcanzaPara(r.receta) : "—")+'</div>' +
+                  '<div class="l">'+r.nombre+'</div>';
+    alc.appendChild(d);
+  });
+}
+
+function cargar(){
+  const cantidades = {};
+  let algo = false;
+  INSUMOS.forEach(ins => {
+    const el = $("#add-"+ins.id);
+    const v = parseFloat(el.value);
+    if(!isNaN(v) && v > 0){ cantidades[ins.id] = v; algo = true; }
+  });
+  if(!algo){ aviso("Escribe primero cuánto trajiste"); return; }
+
+  Sync.sumarInventario(cantidades);
+  INSUMOS.forEach(ins => $("#add-"+ins.id).value = "");
+  aviso("Inventario actualizado");
+}
+
+/* Borrar todo pide dos toques, no un diálogo: los diálogos
+   bloquean la pantalla y aquí se cocina con las manos ocupadas. */
+let armadoParaBorrar = false;
+let temporizadorBorrar = null;
+
+function corregir(){
+  const b = $("#btnCorregir");
+  if(!armadoParaBorrar){
+    armadoParaBorrar = true;
+    b.textContent = "Toca otra vez para confirmar";
+    b.style.color = "var(--tomate)";
+    b.style.borderColor = "var(--tomate)";
+    clearTimeout(temporizadorBorrar);
+    temporizadorBorrar = setTimeout(desarmarBorrado, 4000);
+    return;
+  }
+  Sync.vaciarInventario();
+  desarmarBorrado();
+  aviso("Inventario en cero");
+}
+
+function desarmarBorrado(){
+  armadoParaBorrar = false;
+  const b = $("#btnCorregir");
+  b.textContent = "Corregir: poner el inventario en cero";
+  b.style.color = "";
+  b.style.borderColor = "";
+}
+
+function aviso(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(aviso._t);
+  aviso._t = setTimeout(() => t.classList.remove("on"), 2200);
+}
+
+$("#btnCargar").addEventListener("click", cargar);
+$("#btnCorregir").addEventListener("click", corregir);
+pintarCampos();
+
+/* refrescar los relojes cada 20 s */
+setInterval(() => { if(ordenesActuales.length) pintar(ordenesActuales); }, 20000);
+
+Sync.iniciar({ onOrdenes: pintar, onInventario: pintarInventario, onEstado: pintarEstado });
+
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>

@@ -1,0 +1,17 @@
+{
+  "name": "Doña Papa — Ventas",
+  "short_name": "Doña Papa",
+  "description": "Ventas e inventario de Doña Papa, salchipapas de la casa.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF1DF",
+  "theme_color": "#35704F",
+  "lang": "es-EC",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
