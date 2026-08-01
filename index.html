@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<title>Doña Papa — Ventas</title>
+<title>Doña Papa — Caja</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#35704F">
 <meta name="mobile-web-app-capable" content="yes">
@@ -13,8 +13,7 @@
   /* Colores exactos de la marca Doña Papa */
   :root{
     --verde:#35704F;
-    --verde-osc:#35704F;      /* barra superior */
-    --verde-linea:#E2D6BC;    /* bordes */
+    --verde-linea:#E2D6BC;
     --mantequilla:#EFC04E;
     --tomate:#D2503C;
     --crema:#FAF1DF;
@@ -29,62 +28,36 @@
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;height:100%}
-  body{
-    background:var(--fondo);color:var(--texto);font-family:var(--body);
+  body{background:var(--fondo);color:var(--texto);font-family:var(--body);
     font-size:16px;line-height:1.4;overscroll-behavior:none;
-    padding-bottom:env(safe-area-inset-bottom);
-  }
+    padding-bottom:env(safe-area-inset-bottom)}
   button{font-family:inherit;font-size:inherit;color:inherit;border:0;background:none;cursor:pointer}
   input{font-family:inherit;font-size:16px}
 
   .app{max-width:520px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
 
-  /* ---------------- barra superior ---------------- */
-  .top{
-    background:var(--verde-osc);border-bottom:1px solid var(--verde-linea);
-    padding:12px 16px;display:flex;align-items:center;gap:12px;
-    position:sticky;top:0;z-index:10;
-  }
+  .top{background:var(--verde);border-bottom:1px solid var(--verde-linea);
+    padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
   .top .marca{font-family:var(--display);font-weight:700;text-transform:uppercase;
     letter-spacing:.04em;font-size:15px;line-height:1;color:var(--mantequilla)}
-  .top .estado{font-size:11px;color:#BFD6C6;margin-top:3px;
-    text-transform:uppercase;letter-spacing:.1em;font-family:var(--display)}
+  .top .estado{font-size:11px;color:#BFD6C6;margin-top:3px;text-transform:uppercase;
+    letter-spacing:.1em;font-family:var(--display)}
   .top .hoy{margin-left:auto;text-align:right}
-  .top .hoy .n{font-family:var(--display);font-size:21px;font-weight:700;line-height:1;color:#FFFFFF;font-variant-numeric:tabular-nums}
-  .top .hoy .l{font-size:10px;color:#BFD6C6;text-transform:uppercase;
-    letter-spacing:.12em;font-family:var(--display)}
+  .top .hoy .n{font-family:var(--display);font-size:21px;font-weight:700;line-height:1;
+    color:#FFFFFF;font-variant-numeric:tabular-nums}
+  .top .hoy .l{font-size:10px;color:#BFD6C6;text-transform:uppercase;letter-spacing:.12em;
+    font-family:var(--display)}
 
-  /* ---------------- pestañas ---------------- */
-  .tabs{display:grid;grid-template-columns:repeat(5,1fr);background:var(--panel);
+  .tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--panel);
     border-bottom:1px solid var(--verde-linea);position:sticky;top:57px;z-index:9}
-  .tabs button{padding:13px 2px;font-family:var(--display);font-size:10.5px;
-    text-transform:uppercase;letter-spacing:.06em;color:var(--texto-suave);
-    border-bottom:3px solid transparent;position:relative}
+  .tabs button{padding:14px 4px;font-family:var(--display);font-size:12px;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--texto-suave);
+    border-bottom:3px solid transparent}
   .tabs button[aria-selected="true"]{color:var(--verde);border-bottom-color:var(--verde)}
   .pin{display:inline-block;background:var(--tomate);color:#fff;border-radius:99px;
-    min-width:17px;padding:1px 5px;font-size:10px;line-height:1.4;margin-left:2px;
+    min-width:17px;padding:1px 5px;font-size:10px;line-height:1.4;margin-left:3px;
     vertical-align:top}
-  .pin[hidden]{display:none}   /* si no, display:inline-block gana sobre hidden */
-
-  /* ---------------- órdenes en cocina ---------------- */
-  .orden{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
-    padding:13px 14px;display:flex;align-items:center;gap:12px}
-  .orden.lista{border-color:var(--verde);background:#F1F8F3}
-  .orden .n{font-family:var(--display);font-weight:700;font-size:21px;color:var(--verde);
-    font-variant-numeric:tabular-nums;min-width:42px}
-  .orden .d{flex:1;min-width:0}
-  .orden .d .it{display:block;font-size:14px;line-height:1.35}
-  .orden .d .mt{display:block;font-size:11.5px;color:var(--texto-suave);font-family:var(--display);
-    text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
-  .orden .marca{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;
-    font-size:11px;padding:8px 12px;border-radius:8px;flex:none}
-  .orden .marca.esperando{background:var(--panel-alto);color:var(--texto-suave)}
-  .orden .marca.entregar{background:var(--verde);color:#fff}
-
-  .conex{display:flex;align-items:center;gap:8px;font-size:11px;font-family:var(--display);
-    text-transform:uppercase;letter-spacing:.1em;color:var(--texto-suave)}
-  .punto{width:9px;height:9px;border-radius:50%;background:var(--tomate);flex:none}
-  .punto.on{background:var(--verde)}
+  .pin[hidden]{display:none}
 
   main{flex:1;padding:16px 16px 28px}
   .pane{display:none;flex-direction:column;gap:16px}
@@ -92,13 +65,14 @@
 
   h2{font-family:var(--display);font-size:13px;text-transform:uppercase;letter-spacing:.16em;
     color:var(--texto-suave);margin:0 0 2px}
+  .nota{font-size:13px;color:var(--texto-suave);line-height:1.5;margin:0}
+  .nota b{color:var(--texto);font-family:var(--display)}
 
-  /* ---------------- botones de producto ---------------- */
+  /* productos */
   .prods{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .prod{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;box-shadow:0 1px 2px rgba(46,36,25,.06);
-    padding:15px 13px;text-align:left;display:flex;flex-direction:column;gap:3px;
-    transition:transform .06s, background .12s;
-  }
+  .prod{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
+    box-shadow:0 1px 2px rgba(46,36,25,.06);padding:15px 13px;text-align:left;
+    display:flex;flex-direction:column;gap:3px;transition:transform .06s, background .12s}
   .prod:active{transform:scale(.96);background:var(--panel-alto)}
   .prod .nm{font-family:var(--display);font-weight:700;font-size:16px;line-height:1.1}
   .prod .pr{font-family:var(--display);font-size:19px;color:var(--verde);
@@ -107,9 +81,8 @@
   .prod .falta{font-size:10.5px;color:var(--tomate);text-transform:uppercase;
     letter-spacing:.08em;font-family:var(--display)}
 
-  /* ---------------- pedido ---------------- */
-  .pedido{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
-    overflow:hidden}
+  /* pedido */
+  .pedido{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;overflow:hidden}
   .pedido .vacio{padding:26px 16px;text-align:center;color:var(--texto-suave);font-size:14px}
   .linea{display:flex;align-items:center;gap:10px;padding:11px 14px;
     border-bottom:1px solid var(--verde-linea)}
@@ -121,12 +94,13 @@
   .linea .qt{width:32px;height:32px;border-radius:8px;background:var(--panel-alto);
     display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;
     color:var(--texto-suave)}
-  .linea .qt:active{background:var(--verde)}
+  .linea .qt:active{background:var(--verde);color:#fff}
 
   .total{display:flex;align-items:baseline;padding:14px;background:var(--panel-alto)}
   .total .l{font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;
     font-size:12px;color:var(--texto-suave)}
-  .total .v{margin-left:auto;font-family:var(--display);font-size:31px;font-weight:700;color:var(--verde);font-variant-numeric:tabular-nums;line-height:1}
+  .total .v{margin-left:auto;font-family:var(--display);font-size:31px;font-weight:700;
+    color:var(--verde);font-variant-numeric:tabular-nums;line-height:1}
 
   .acciones{display:grid;grid-template-columns:1fr 2.2fr;gap:10px}
   .btn{border-radius:13px;padding:17px 14px;font-family:var(--display);font-weight:700;
@@ -139,7 +113,6 @@
   .btn.ancho{grid-column:1/-1}
   .btn.rojo{background:transparent;color:var(--tomate);border:1px solid var(--tomate)}
 
-  /* ---------------- vuelto ---------------- */
   .vuelto{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
     padding:13px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .vuelto label{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;
@@ -151,74 +124,59 @@
   .vuelto .res b{color:var(--verde);font-size:23px;display:block;line-height:1.1;
     font-variant-numeric:tabular-nums}
 
-  /* ---------------- inventario ---------------- */
-  .inv{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
-    padding:6px 14px}
-  .invfila{display:flex;align-items:center;gap:12px;padding:12px 0;
-    border-bottom:1px solid var(--verde-linea)}
-  .invfila:last-child{border-bottom:0}
-  .invfila .nm{font-size:15px;min-width:78px}
-  .barra{flex:1;height:8px;background:var(--panel-alto);border-radius:99px;overflow:hidden}
-  .barra i{display:block;height:100%;background:var(--verde);border-radius:99px;
-    transition:width .3s}
-  .barra i.bajo{background:var(--mantequilla)}
-  .barra i.critico{background:var(--tomate)}
-  .invfila .q{font-family:var(--display);font-variant-numeric:tabular-nums;font-size:16px;
-    min-width:70px;text-align:right}
-  .invfila .q s{text-decoration:none;color:var(--texto-suave);font-size:12px}
+  /* órdenes */
+  .orden{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
+    padding:13px 14px;display:flex;align-items:center;gap:12px}
+  .orden.lista{border-color:var(--verde);background:#F1F8F3}
+  .orden .n{font-family:var(--display);font-weight:700;font-size:21px;color:var(--verde);
+    font-variant-numeric:tabular-nums;min-width:42px}
+  .orden .d{flex:1;min-width:0}
+  .orden .d .it{display:block;font-size:14px;line-height:1.35}
+  .orden .d .mt{display:block;font-size:11.5px;color:var(--texto-suave);
+    font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+  .orden .marca{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;
+    font-size:11px;padding:8px 12px;border-radius:8px;flex:none}
+  .orden .marca.esperando{background:var(--panel-alto);color:var(--texto-suave)}
+  .orden .marca.entregar{background:var(--verde);color:#fff}
 
-  .aviso{border-radius:12px;padding:12px 14px;font-size:14px;display:flex;gap:10px;
-    align-items:flex-start}
-  .aviso.warn{background:rgba(239,192,78,.14);border:1px solid rgba(239,192,78,.4)}
-  .aviso.crit{background:rgba(224,106,85,.14);border:1px solid rgba(224,106,85,.45)}
-  .aviso.ok{background:rgba(62,138,97,.14);border:1px solid rgba(62,138,97,.45)}
-  .aviso b{font-family:var(--display)}
+  .conex{display:flex;align-items:center;gap:8px;font-size:11px;font-family:var(--display);
+    text-transform:uppercase;letter-spacing:.1em;color:var(--texto-suave)}
+  .punto{width:9px;height:9px;border-radius:50%;background:var(--tomate);flex:none}
+  .punto.on{background:var(--verde)}
 
-  .campos{display:flex;flex-direction:column;gap:10px}
-  .campo{display:flex;align-items:center;gap:12px;background:var(--panel);
-    border:1px solid var(--verde-linea);border-radius:12px;padding:11px 14px}
-  .campo label{flex:1;font-size:15px}
-  .campo .u{font-size:12px;color:var(--texto-suave);font-family:var(--display);
-    text-transform:uppercase;letter-spacing:.08em}
-  .campo input{width:88px;background:var(--panel-alto);border:1px solid var(--verde-linea);
-    border-radius:9px;padding:10px;color:var(--texto);text-align:right;
-    font-family:var(--display);font-size:17px}
-
-  /* ---------------- cierre / resumen ---------------- */
+  /* cierre */
   .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .kpi{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
-    padding:14px}
+  .kpi{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;padding:14px}
   .kpi .l{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;
     font-size:10.5px;color:var(--texto-suave)}
   .kpi .v{font-family:var(--display);font-size:27px;font-weight:700;line-height:1.1;
     margin-top:5px;font-variant-numeric:tabular-nums}
   .kpi.destaca .v{color:var(--verde)}
 
+  .tbl{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;overflow:hidden}
   table{width:100%;border-collapse:collapse;font-size:14px}
   th{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:10px;
-    color:var(--texto-suave);text-align:left;padding:8px 10px;font-weight:400}
+    color:var(--texto-suave);text-align:left;padding:9px 10px;font-weight:400}
   td{padding:10px;border-top:1px solid var(--verde-linea)}
-  .tbl{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
-    overflow:hidden}
   .r{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--display)}
 
-  /* ---------------- historial ---------------- */
-  .dia{background:var(--panel);border:1px solid var(--verde-linea);border-radius:14px;
-    padding:14px;display:flex;align-items:center;gap:14px}
-  .dia .f{font-family:var(--display);font-size:14px}
-  .dia .f s{display:block;text-decoration:none;color:var(--texto-suave);font-size:11.5px;
-    text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
-  .dia .m{margin-left:auto;text-align:right}
-  .dia .m b{font-family:var(--display);font-size:21px;color:var(--verde);
-    font-variant-numeric:tabular-nums;display:block;line-height:1}
-  .dia .m s{text-decoration:none;font-size:11px;color:var(--texto-suave)}
+  .campo{display:flex;align-items:center;gap:12px;background:var(--panel);
+    border:1px solid var(--verde-linea);border-radius:12px;padding:11px 14px}
+  .campo label{flex:1;font-size:15px}
+  .campo input{width:100px;background:var(--panel-alto);border:1px solid var(--verde-linea);
+    border-radius:9px;padding:11px;color:var(--texto);text-align:right;
+    font-family:var(--display);font-size:18px}
 
-  .nota{font-size:13px;color:var(--texto-suave);line-height:1.5}
-  .nota b{color:var(--texto);font-family:var(--display)}
+  .aviso{border-radius:12px;padding:12px 14px;font-size:14px;display:flex;gap:10px;
+    align-items:flex-start}
+  .aviso.warn{background:rgba(239,192,78,.2);border:1px solid rgba(239,192,78,.55)}
+  .aviso.crit{background:rgba(210,80,60,.13);border:1px solid rgba(210,80,60,.45)}
+  .aviso.ok{background:rgba(53,112,79,.11);border:1px solid rgba(53,112,79,.4)}
+  .aviso b{font-family:var(--display)}
 
   .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);
     background:var(--verde);color:#fff;padding:13px 22px;border-radius:99px;
-    font-family:var(--display);font-size:15px;box-shadow:0 8px 26px rgba(0,0,0,.5);
+    font-family:var(--display);font-size:15px;box-shadow:0 8px 26px rgba(46,36,25,.35);
     opacity:0;transition:.25s;pointer-events:none;z-index:50;white-space:nowrap}
   .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
 
@@ -229,7 +187,7 @@
   <header class="top">
     <div>
       <div class="marca">Doña Papa</div>
-      <div class="estado" id="estadoJornada">Jornada cerrada</div>
+      <div class="estado" id="estadoJornada">Caja</div>
     </div>
     <div class="hoy">
       <div class="n" id="topVentas">$0.00</div>
@@ -240,9 +198,7 @@
   <nav class="tabs" role="tablist">
     <button role="tab" aria-selected="true"  data-pane="vender">Vender</button>
     <button role="tab" aria-selected="false" data-pane="cocina">Cocina <span id="pinCocina" class="pin" hidden>0</span></button>
-    <button role="tab" aria-selected="false" data-pane="inventario">Stock</button>
     <button role="tab" aria-selected="false" data-pane="cierre">Cierre</button>
-    <button role="tab" aria-selected="false" data-pane="historial">Historial</button>
   </nav>
 
   <main>
@@ -253,18 +209,15 @@
         <h2>Toca para armar el pedido</h2>
         <div class="prods" id="prods"></div>
       </div>
-
       <div>
         <h2>Pedido</h2>
         <div class="pedido" id="pedido"></div>
       </div>
-
       <div class="vuelto">
         <label for="paga">Paga con</label>
         <input id="paga" type="number" inputmode="decimal" step="0.25" min="0" placeholder="0.00">
         <div class="res"><span style="font-size:11px;color:var(--texto-suave)">VUELTO</span><b id="vuelto">$0.00</b></div>
       </div>
-
       <div class="acciones">
         <button class="btn gris" id="btnLimpiar">Borrar</button>
         <button class="btn cobrar" id="btnCobrar" disabled>Cobrar</button>
@@ -286,34 +239,18 @@
       </div>
     </section>
 
-    <!-- ============ INVENTARIO ============ -->
-    <section class="pane" id="pane-inventario">
-      <div id="invEstado"></div>
-      <div>
-        <h2>Lo que queda ahora</h2>
-        <div class="inv" id="invActual"></div>
-      </div>
-      <div>
-        <h2>Alcanza para</h2>
-        <div class="inv" id="invAlcance"></div>
-      </div>
-      <p class="nota">El inventario <b>lo carga la cocina</b> desde su pantalla, y se descuenta solo con cada venta. Si ves algo mal, avísale a la cocina para que corrija — así los dos ven siempre lo mismo.</p>
-    </section>
-
     <!-- ============ CIERRE ============ -->
     <section class="pane" id="pane-cierre">
       <div class="kpis">
-        <div class="kpi destaca"><div class="l">Ventas del día</div><div class="v" id="kVentas">$0.00</div></div>
-        <div class="kpi destaca"><div class="l">Utilidad real</div><div class="v" id="kUtil">$0.00</div></div>
+        <div class="kpi destaca"><div class="l">Vendido hoy</div><div class="v" id="kVentas">$0.00</div></div>
         <div class="kpi"><div class="l">Clientes</div><div class="v" id="kClientes">0</div></div>
-        <div class="kpi"><div class="l">Ticket promedio</div><div class="v" id="kTicket">$0.00</div></div>
       </div>
 
       <div>
         <h2>Qué se vendió</h2>
         <div class="tbl">
           <table>
-            <thead><tr><th>Producto</th><th class="r">Cant.</th><th class="r">Venta</th><th class="r">Deja</th></tr></thead>
+            <thead><tr><th>Producto</th><th class="r">Cant.</th><th class="r">Total</th></tr></thead>
             <tbody id="tblProds"></tbody>
           </table>
         </div>
@@ -321,6 +258,7 @@
 
       <div>
         <h2>Cuadre de caja</h2>
+        <p class="nota" style="margin-bottom:10px">Cuenta el efectivo que hay y escríbelo. Te dice si coincide con lo cobrado.</p>
         <div class="campo">
           <label for="caja">Efectivo contado</label>
           <input id="caja" type="number" inputmode="decimal" step="0.25" min="0" placeholder="0.00">
@@ -330,26 +268,8 @@
 
       <div>
         <h2>Cerrar el día</h2>
-        <p class="nota">Guarda la jornada en el historial y deja la app lista para el próximo día. <b>El inventario que quede se conserva</b> para mañana.</p>
-        <button class="btn rojo ancho" id="btnCerrar">Cerrar jornada y guardar</button>
-      </div>
-    </section>
-
-    <!-- ============ HISTORIAL ============ -->
-    <section class="pane" id="pane-historial">
-      <div id="histResumen"></div>
-      <div id="hist" style="display:flex;flex-direction:column;gap:10px"></div>
-      <button class="btn gris ancho" id="btnExportar">Copiar historial como texto</button>
-
-      <div>
-        <h2>Respaldo</h2>
-        <p class="nota">Los datos se guardan solos en este teléfono y aguantan que refresques o cierres la app. Pero <b>si borras los datos del navegador se pierden</b>. Descarga un respaldo de vez en cuando — al final de cada mes basta.</p>
-        <div class="acciones" style="margin-top:12px">
-          <button class="btn gris" id="btnRestaurar">Restaurar</button>
-          <button class="btn cobrar" id="btnRespaldo">Descargar respaldo</button>
-        </div>
-        <input type="file" id="archivoRespaldo" accept="application/json,.json" hidden>
-        <p class="nota" style="margin-top:10px" id="estadoGuardado"></p>
+        <p class="nota">Guarda la jornada y deja la caja en cero para el próximo día. El inventario que quede se conserva.</p>
+        <button class="btn rojo ancho" id="btnCerrar" style="margin-top:12px">Cerrar jornada y guardar</button>
       </div>
     </section>
   </main>
@@ -363,117 +283,32 @@
 "use strict";
 
 /* ============================================================
-   Datos base — precios, costos y receta de cada producto.
-   La receta es lo que permite descontar el inventario solo.
+   Productos: precio y receta. Sin costos — esos viven solo en
+   el perfil de dueña, para que la caja no los conozca.
    ============================================================ */
 const PRODUCTOS = [
-  { id:"personal", nombre:"Personal",    precio:1.25, costo:0.74, receta:{ papa:0.33, salchicha:1, tarrina:1 } },
-  { id:"dona",     nombre:"De la Doña",  precio:2.00, costo:1.35, receta:{ papa:0.66, salchicha:2, tarrina:1 } },
-  { id:"familiar", nombre:"Familiar",    precio:3.50, costo:2.04, receta:{ papa:1.10, salchicha:3, tarrina:1 } },
-  { id:"hotdog",   nombre:"Hotdog",      precio:1.50, costo:0.78, receta:{ papa:0.09, salchicha:1, pan:1 } },
-  { id:"cola",     nombre:"Gaseosa",     precio:0.50, costo:0.21, receta:{ cola:1 } }
+  { id:"personal", nombre:"Personal",    precio:1.25, receta:{ papa:0.33, salchicha:1, tarrina:1 } },
+  { id:"dona",     nombre:"De la Doña",  precio:2.00, receta:{ papa:0.66, salchicha:2, tarrina:1 } },
+  { id:"familiar", nombre:"Familiar",    precio:3.50, receta:{ papa:1.10, salchicha:3, tarrina:1 } },
+  { id:"hotdog",   nombre:"Hotdog",      precio:1.50, receta:{ papa:0.09, salchicha:1, pan:1 } },
+  { id:"cola",     nombre:"Gaseosa",     precio:0.50, receta:{ cola:1 } }
 ];
 
-/* La lista de insumos vive en sync.js, para que la caja y la cocina
-   usen exactamente la misma y no se desincronicen al cambiarla. */
-const INSUMOS = window.INSUMOS;
+let pedido     = {};
+let inventario = {};
+let ventas     = [];
 
-const LLAVE = "donapapa_ventas_v1";
-
-/* ============================================================
-   Estado
-   ============================================================ */
-let estado = cargar();
-let pedido = {};        // { idProducto: cantidad }
-let inventario = {};    // lo manda la cocina por la nube
-
-let almacenamientoOk = true;
-
-function vacio(){
-  return { ventas:[], historial:[], abierta:false, numeroOrden:0 };
-}
-
-function cargar(){
-  try{
-    const raw = localStorage.getItem(LLAVE);
-    if(raw){
-      const d = JSON.parse(raw);
-      // completar campos que falten si el respaldo viene de una versión anterior
-      return Object.assign(vacio(), d);
-    }
-  }catch(e){ almacenamientoOk = false; }
-  return vacio();
-}
-
-function guardar(){
-  try{
-    localStorage.setItem(LLAVE, JSON.stringify(estado));
-    almacenamientoOk = true;
-  }catch(e){
-    almacenamientoOk = false;
-    toast("¡No se pudo guardar! Revisa el respaldo");
-  }
-  pintarEstadoGuardado();
-}
-
-function pintarEstadoGuardado(){
-  const el = $("#estadoGuardado");
-  if(!el) return;
-  el.innerHTML = almacenamientoOk
-    ? '✓ Guardado en este teléfono · ' + estado.ventas.length + ' ventas de hoy, ' + estado.historial.length + ' jornadas en historial'
-    : '<b style="color:var(--tomate)">⚠ Este navegador no está guardando los datos.</b> Puede ser modo incógnito. Sal de incógnito o los datos se perderán al cerrar.';
-}
-
-/* ---------- respaldo ---------- */
-function descargarRespaldo(){
-  const datos = JSON.stringify(estado, null, 2);
-  const blob = new Blob([datos], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "donapapa-respaldo-" + new Date().toISOString().slice(0,10) + ".json";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(()=> URL.revokeObjectURL(url), 1000);
-  toast("Respaldo descargado");
-}
-
-function restaurarRespaldo(archivo){
-  const lector = new FileReader();
-  lector.onload = e => {
-    try{
-      const d = JSON.parse(e.target.result);
-      if(!d || typeof d !== "object" || !("historial" in d)) throw new Error("formato");
-      if(!confirm("Esto reemplaza los datos actuales por los del respaldo. ¿Seguro?")) return;
-      estado = Object.assign(vacio(), d);
-      pedido = {};
-      guardar();
-      pintarTodo();
-      toast("Respaldo restaurado");
-    }catch(err){
-      toast("El archivo no es un respaldo válido");
-    }
-  };
-  lector.readAsText(archivo);
-}
-
-/* ============================================================
-   Utilidades
-   ============================================================ */
 const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const money = n => "$" + (Math.round(n*100)/100).toFixed(2);
-const prod = id => PRODUCTOS.find(p => p.id === id);
-
-function num(n){ return Math.round(n*100)/100; }
+const prod  = id => PRODUCTOS.find(p => p.id === id);
 
 function toast(msg){
   const t = $("#toast");
   t.textContent = msg;
   t.classList.add("on");
   clearTimeout(toast._t);
-  toast._t = setTimeout(()=> t.classList.remove("on"), 1900);
+  toast._t = setTimeout(() => t.classList.remove("on"), 1900);
 }
 
 function hoyTexto(){
@@ -482,57 +317,42 @@ function hoyTexto(){
   return dias[d.getDay()] + " " + d.getDate() + "/" + (d.getMonth()+1);
 }
 
-/* Cuántas unidades de un producto alcanzan con el inventario actual */
-function alcanzaPara(p, comprometido){
-  return window.Sync ? Sync.alcanzaPara(p.receta, comprometido) : 999;
-}
+function hayInventario(){ return window.Sync ? Sync.hayInventario() : false; }
+function alcanzaPara(p, comprometido){ return window.Sync ? Sync.alcanzaPara(p.receta, comprometido) : 999; }
 
-/* Insumos comprometidos por el pedido que está en pantalla */
 function consumoPedido(){
   const c = {};
-  for(const [id, q] of Object.entries(pedido)){
-    for(const [ins, cant] of Object.entries(prod(id).receta)){
-      c[ins] = (c[ins] || 0) + cant*q;
-    }
-  }
+  for(const [id,q] of Object.entries(pedido))
+    for(const [ins,cant] of Object.entries(prod(id).receta))
+      c[ins] = (c[ins]||0) + cant*q;
   return c;
 }
 
-function hayInventario(){
-  return window.Sync ? Sync.hayInventario() : false;
-}
-
-/* ============================================================
-   Pintar: productos
-   ============================================================ */
+/* ---------------- productos ---------------- */
 function pintarProductos(){
   const cont = $("#prods");
   cont.innerHTML = "";
   const comprometido = consumoPedido();
 
   PRODUCTOS.forEach(p => {
-    // lo que alcanza, descontando lo que ya está en el pedido
     const restantes = alcanzaPara(p, comprometido);
     const sinStock = hayInventario() && restantes <= 0;
 
     const b = document.createElement("button");
     b.className = "prod" + (sinStock ? " sin" : "");
-    b.innerHTML =
-      '<span class="nm">'+p.nombre+'</span>' +
-      '<span class="pr">'+money(p.precio)+'</span>' +
-      (sinStock ? '<span class="falta">Sin insumos</span>' : '');
+    b.innerHTML = '<span class="nm">'+p.nombre+'</span>' +
+                  '<span class="pr">'+money(p.precio)+'</span>' +
+                  (sinStock ? '<span class="falta">Sin insumos</span>' : '');
     b.addEventListener("click", () => {
       if(sinStock){ toast("No alcanzan los insumos"); return; }
-      pedido[p.id] = (pedido[p.id] || 0) + 1;
+      pedido[p.id] = (pedido[p.id]||0) + 1;
       pintarPedido(); pintarProductos();
     });
     cont.appendChild(b);
   });
 }
 
-/* ============================================================
-   Pintar: pedido actual
-   ============================================================ */
+/* ---------------- pedido ---------------- */
 function totalPedido(){
   return Object.entries(pedido).reduce((s,[id,q]) => s + prod(id).precio*q, 0);
 }
@@ -549,10 +369,9 @@ function pintarPedido(){
       const p = prod(id);
       const fila = document.createElement("div");
       fila.className = "linea";
-      fila.innerHTML =
-        '<span class="qn">'+q+'</span>' +
-        '<span class="nm">'+p.nombre+'</span>' +
-        '<span class="im">'+money(p.precio*q)+'</span>';
+      fila.innerHTML = '<span class="qn">'+q+'</span>' +
+                       '<span class="nm">'+p.nombre+'</span>' +
+                       '<span class="im">'+money(p.precio*q)+'</span>';
       const menos = document.createElement("button");
       menos.className = "qt"; menos.textContent = "−";
       menos.setAttribute("aria-label","Quitar uno de "+p.nombre);
@@ -582,266 +401,79 @@ function calcularVuelto(){
   $("#vuelto").textContent = (isNaN(paga) || paga < t) ? money(0) : money(paga - t);
 }
 
-/* ============================================================
-   Cobrar / deshacer
-   ============================================================ */
+/* ---------------- cobrar ---------------- */
 function cobrar(){
   const items = Object.entries(pedido).filter(([,q]) => q > 0);
-  if(!items.length) return;
+  if(!items.length || !window.Sync) return;
 
   const total = totalPedido();
-  const utilidad = items.reduce((s,[id,q]) => s + (prod(id).precio - prod(id).costo)*q, 0);
-
-  // descontar del inventario que carga la cocina
-  if(window.Sync) Sync.consumirInventario(consumoPedido());
-
+  const numero = Sync.siguienteNumero();
   const ahora = new Date();
-  estado.numeroOrden = (estado.numeroOrden || 0) + 1;
-  const numero = estado.numeroOrden;
 
-  estado.ventas.push({
+  Sync.registrarVenta({
+    numero,
     hora: ahora.getHours() + ":" + String(ahora.getMinutes()).padStart(2,"0"),
-    items: items.map(([id,q]) => ({id, q})),
-    total: num(total),
-    utilidad: num(utilidad),
-    numero
+    items: items.map(([id,q]) => ({ id, q })),
+    total: Math.round(total*100)/100
   });
-  estado.abierta = true;
-  guardar();
 
-  // enviar a cocina todo lo que haya que cocinar (la gaseosa no se cocina)
-  const paraCocina = items
-    .filter(([id]) => id !== "cola")
-    .map(([id,q]) => ({ id, nombre: prod(id).nombre, q }));
-  if(paraCocina.length && window.Sync){
-    Sync.crearOrden({ numero, items: paraCocina, total: num(total) });
-  }
+  Sync.consumirInventario(consumoPedido());
+
+  const paraCocina = items.filter(([id]) => id !== "cola")
+                          .map(([id,q]) => ({ id, nombre: prod(id).nombre, q }));
+  if(paraCocina.length) Sync.crearOrden({ numero, items: paraCocina, total });
 
   pedido = {};
   $("#paga").value = "";
-  pintarTodo();
+  pintarPedido(); pintarProductos();
   toast(paraCocina.length ? "Orden #"+numero+" a cocina" : "Cobrado " + money(total));
 }
 
 function deshacer(){
-  if(!estado.ventas.length){ toast("No hay ventas que deshacer"); return; }
-  const v = estado.ventas.pop();
-  // devolver los insumos al inventario compartido
+  if(!window.Sync) return;
+  const v = Sync.quitarUltimaVenta();
+  if(!v){ toast("No hay ventas que deshacer"); return; }
+
   const devolver = {};
   v.items.forEach(({id,q}) => {
-    for(const [ins, cant] of Object.entries(prod(id).receta)){
-      devolver[ins] = (devolver[ins] || 0) + cant*q;
-    }
+    for(const [ins,cant] of Object.entries(prod(id).receta))
+      devolver[ins] = (devolver[ins]||0) + cant*q;
   });
-  if(window.Sync) Sync.devolverInventario(devolver);
-  guardar();
-  pintarTodo();
+  Sync.devolverInventario(devolver);
   toast("Venta de " + money(v.total) + " eliminada");
 }
 
-/* ============================================================
-   Pintar: inventario
-   ============================================================ */
-function pintarInventario(){
-  const cont = $("#invActual");
-  cont.innerHTML = "";
-
-  INSUMOS.forEach(ins => {
-    const hay = inventario[ins.id] || 0;
-    const pct = Math.max(0, Math.min(100, (hay / ins.ref) * 100));
-    const clase = pct < 15 ? "critico" : pct < 35 ? "bajo" : "";
-    const fila = document.createElement("div");
-    fila.className = "invfila";
-    fila.innerHTML =
-      '<span class="nm">'+ins.nombre+'</span>' +
-      '<span class="barra"><i class="'+clase+'" style="width:'+pct+'%"></i></span>' +
-      '<span class="q">'+ (Math.round(hay*10)/10) +' <s>'+ins.corto+'</s></span>';
-    cont.appendChild(fila);
-  });
-
-  // cuántas porciones salen de cada producto con lo que hay
-  const alc = $("#invAlcance");
-  if(alc){
-    alc.innerHTML = "";
-    PRODUCTOS.forEach(p => {
-      if(p.id === "cola") return;
-      const n = hayInventario() ? alcanzaPara(p) : "—";
-      const fila = document.createElement("div");
-      fila.className = "invfila";
-      fila.innerHTML = '<span class="nm">'+p.nombre+'</span>' +
-        '<span style="flex:1"></span>' +
-        '<span class="q">'+n+' <s>porciones</s></span>';
-      alc.appendChild(fila);
-    });
-  }
-
-  // avisos de cuánto alcanza
+/* ---------------- avisos de stock ---------------- */
+function pintarAvisoStock(){
   const avisos = [];
   PRODUCTOS.forEach(p => {
     const n = alcanzaPara(p);
-    if(hayInventario() && n <= 5) avisos.push({n, nombre:p.nombre});
+    if(hayInventario() && n <= 5) avisos.push({ n, nombre:p.nombre });
   });
   avisos.sort((a,b) => a.n - b.n);
 
-  const zona = $("#avisoStock");
-  const zona2 = $("#invEstado");
-  let html = "";
+  let html;
   if(!hayInventario()){
-    html = '<div class="aviso warn"><span>⚠</span><span><b>Sin inventario cargado.</b> Pídele a la cocina que cargue lo de hoy en su pantalla. Puedes vender igual, pero no te avisará cuando se acabe algo.</span></div>';
+    html = '<div class="aviso warn"><span>⚠</span><span><b>Sin inventario cargado.</b> Pídele a la cocina que cargue lo de hoy en su pantalla.</span></div>';
   } else if(avisos.length){
     const a = avisos[0];
-    const clase = a.n === 0 ? "crit" : "warn";
-    const txt = a.n === 0
-      ? "<b>Se acabó "+a.nombre+".</b> No alcanzan los insumos para más."
-      : "<b>Quedan "+a.n+" "+a.nombre+".</b> Avisa a la gente antes de que se acabe.";
-    html = '<div class="aviso '+clase+'"><span>⚠</span><span>'+txt+'</span></div>';
+    html = '<div class="aviso '+(a.n===0?"crit":"warn")+'"><span>⚠</span><span>' +
+      (a.n === 0 ? "<b>Se acabó "+a.nombre+".</b> No alcanzan los insumos para más."
+                 : "<b>Quedan "+a.n+" "+a.nombre+".</b> Avisa antes de que se acabe.") +
+      '</span></div>';
   } else {
-    html = '<div class="aviso ok"><span>✓</span><span><b>Inventario sano.</b> Alcanza para '+alcanzaPara(prod("personal"))+' salchipapas personales.</span></div>';
+    html = '<div class="aviso ok"><span>✓</span><span><b>Hay de todo.</b> Alcanza para '+alcanzaPara(prod("personal"))+' salchipapas personales.</span></div>';
   }
-  zona.innerHTML = html;
-  zona2.innerHTML = html;
+  $("#avisoStock").innerHTML = html;
 }
 
-/* El inventario llega desde la cocina por la nube */
 function recibirInventario(inv){
   inventario = inv;
-  pintarInventario();
+  pintarAvisoStock();
   pintarProductos();
 }
 
-/* ============================================================
-   Pintar: cierre
-   ============================================================ */
-function resumenDia(){
-  const ventas = estado.ventas;
-  const total = ventas.reduce((s,v) => s + v.total, 0);
-  const util  = ventas.reduce((s,v) => s + v.utilidad, 0);
-  const porProd = {};
-  ventas.forEach(v => v.items.forEach(({id,q}) => porProd[id] = (porProd[id]||0) + q));
-  return { total:num(total), util:num(util), clientes:ventas.length, porProd,
-           ticket: ventas.length ? num(total/ventas.length) : 0 };
-}
-
-function pintarCierre(){
-  const r = resumenDia();
-  $("#kVentas").textContent   = money(r.total);
-  $("#kUtil").textContent     = money(r.util);
-  $("#kClientes").textContent = r.clientes;
-  $("#kTicket").textContent   = money(r.ticket);
-  $("#topVentas").textContent = money(r.total);
-  $("#estadoJornada").textContent = estado.ventas.length ? "Jornada abierta · " + hoyTexto() : "Jornada sin ventas";
-
-  const tb = $("#tblProds");
-  tb.innerHTML = "";
-  PRODUCTOS.forEach(p => {
-    const q = r.porProd[p.id] || 0;
-    if(!q) return;
-    const tr = document.createElement("tr");
-    tr.innerHTML = "<td>"+p.nombre+"</td>" +
-      '<td class="r">'+q+"</td>" +
-      '<td class="r">'+money(p.precio*q)+"</td>" +
-      '<td class="r" style="color:var(--verde)">'+money((p.precio-p.costo)*q)+"</td>";
-    tb.appendChild(tr);
-  });
-  if(!tb.children.length){
-    tb.innerHTML = '<tr><td colspan="4" style="color:var(--texto-suave);text-align:center;padding:22px">Todavía no hay ventas hoy</td></tr>';
-  }
-  cuadrarCaja();
-}
-
-function cuadrarCaja(){
-  const r = resumenDia();
-  const caja = parseFloat($("#caja").value);
-  const zona = $("#resCaja");
-  if(isNaN(caja)){ zona.innerHTML = ""; return; }
-  const dif = num(caja - r.total);
-  if(Math.abs(dif) < 0.01){
-    zona.innerHTML = '<div class="aviso ok"><span>✓</span><span><b>Cuadra perfecto.</b> El efectivo coincide con lo registrado.</span></div>';
-  } else if(dif < 0){
-    zona.innerHTML = '<div class="aviso crit"><span>⚠</span><span><b>Faltan '+money(-dif)+'.</b> O regalaste alguna porción, o se dio mal un vuelto, o alguna venta no se registró.</span></div>';
-  } else {
-    zona.innerHTML = '<div class="aviso warn"><span>⚠</span><span><b>Sobran '+money(dif)+'.</b> Probablemente una venta no quedó registrada en la app.</span></div>';
-  }
-}
-
-function cerrarJornada(){
-  if(!estado.ventas.length){ toast("No hay ventas para cerrar"); return; }
-  const r = resumenDia();
-  const caja = parseFloat($("#caja").value);
-
-  estado.historial.unshift({
-    fecha: new Date().toISOString().slice(0,10),
-    etiqueta: hoyTexto(),
-    total: r.total, utilidad: r.util, clientes: r.clientes, ticket: r.ticket,
-    porProd: r.porProd,
-    caja: isNaN(caja) ? null : num(caja),
-    diferencia: isNaN(caja) ? null : num(caja - r.total)
-  });
-  estado.ventas = [];
-  estado.abierta = false;
-  guardar();
-  $("#caja").value = "";
-  pintarTodo();
-  irA("historial");
-  toast("Jornada guardada");
-}
-
-/* ============================================================
-   Pintar: historial
-   ============================================================ */
-function pintarHistorial(){
-  const cont = $("#hist");
-  cont.innerHTML = "";
-  const h = estado.historial;
-
-  const res = $("#histResumen");
-  if(!h.length){
-    res.innerHTML = '<div class="aviso warn"><span>·</span><span>Todavía no hay jornadas guardadas. Cierra el día desde la pestaña <b>Cierre</b> y aparecerá aquí.</span></div>';
-    return;
-  }
-
-  const totU = h.reduce((s,d) => s + d.utilidad, 0);
-  const totV = h.reduce((s,d) => s + d.total, 0);
-  res.innerHTML =
-    '<div class="kpis">' +
-      '<div class="kpi destaca"><div class="l">Ganado en total</div><div class="v">'+money(totU)+'</div></div>' +
-      '<div class="kpi"><div class="l">Vendido en total</div><div class="v">'+money(totV)+'</div></div>' +
-    '</div>';
-
-  h.forEach(d => {
-    const el = document.createElement("div");
-    el.className = "dia";
-    const dif = d.diferencia;
-    const nota = dif === null ? "sin cuadre"
-      : Math.abs(dif) < 0.01 ? "caja cuadrada"
-      : (dif < 0 ? "faltaron "+money(-dif) : "sobraron "+money(dif));
-    el.innerHTML =
-      '<div class="f">'+d.etiqueta+'<s>'+d.clientes+' clientes · ticket '+money(d.ticket)+' · '+nota+'</s></div>' +
-      '<div class="m"><b>'+money(d.utilidad)+'</b><s>de '+money(d.total)+' vendidos</s></div>';
-    cont.appendChild(el);
-  });
-}
-
-function exportar(){
-  if(!estado.historial.length){ toast("No hay historial"); return; }
-  let txt = "DOÑA PAPA — Historial de jornadas\n\n";
-  estado.historial.forEach(d => {
-    txt += d.etiqueta + " (" + d.fecha + ")\n";
-    txt += "  Vendido: " + money(d.total) + "   Utilidad: " + money(d.utilidad) + "\n";
-    txt += "  Clientes: " + d.clientes + "   Ticket: " + money(d.ticket) + "\n";
-    PRODUCTOS.forEach(p => { if(d.porProd[p.id]) txt += "  - " + p.nombre + ": " + d.porProd[p.id] + "\n"; });
-    txt += "\n";
-  });
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(()=> toast("Copiado, pégalo en WhatsApp"));
-  } else {
-    toast("Tu navegador no permite copiar");
-  }
-}
-
-/* ============================================================
-   Cocina — órdenes sincronizadas
-   ============================================================ */
+/* ---------------- cocina ---------------- */
 let listasAntes = 0;
 let audioCtx = null;
 
@@ -849,7 +481,7 @@ function pitido(){
   try{
     audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
     const t = audioCtx.currentTime;
-    [1046, 1568].forEach((hz,i) => {
+    [1046,1568].forEach((hz,i) => {
       const o = audioCtx.createOscillator(), g = audioCtx.createGain();
       o.type = "sine"; o.frequency.value = hz;
       g.gain.setValueAtTime(0.0001, t + i*0.16);
@@ -864,7 +496,7 @@ function pitido(){
 document.addEventListener("click", function despertar(){
   try{ (audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)()).resume(); }catch(e){}
   document.removeEventListener("click", despertar);
-}, {once:true});
+}, { once:true });
 
 function tarjetaOrden(o){
   const el = document.createElement("div");
@@ -872,8 +504,7 @@ function tarjetaOrden(o){
   const txt = o.items.map(i => i.q + "× " + i.nombre).join(", ");
   const min = Math.floor((Date.now() - o.creada)/60000);
 
-  el.innerHTML =
-    '<span class="n">#'+o.numero+'</span>' +
+  el.innerHTML = '<span class="n">#'+o.numero+'</span>' +
     '<span class="d"><span class="it">'+txt+'</span>' +
     '<span class="mt">'+(o.estado==="listo" ? "Lista · llévala" : "hace "+min+" min")+'</span></span>';
 
@@ -887,7 +518,7 @@ function tarjetaOrden(o){
 }
 
 function pintarOrdenes(lista){
-  const pend  = lista.filter(o => o.estado === "pendiente");
+  const pend   = lista.filter(o => o.estado === "pendiente");
   const listas = lista.filter(o => o.estado === "listo");
 
   if(listas.length > listasAntes) pitido();
@@ -917,35 +548,89 @@ function pintarConexion(e){
     p.classList.add("on");
     t.textContent = "Modo local";
     $("#avisoCocina").innerHTML =
-      '<div class="aviso warn"><span>⚠</span><span><b>Modo local.</b> La cocina solo ve las órdenes si está abierta en este mismo teléfono, en otra pestaña. Para usar dos teléfonos hay que conectar la nube.</span></div>';
+      '<div class="aviso warn"><span>⚠</span><span><b>Modo local.</b> La cocina solo ve las órdenes si está abierta en este mismo teléfono.</span></div>';
   }
 }
 
-if(window.Sync){
-  Sync.iniciar({
-    onOrdenes: pintarOrdenes,
-    onInventario: recibirInventario,
-    onEstado: pintarConexion
+/* ---------------- cierre ---------------- */
+function pintarVentas(lista){
+  ventas = lista;
+  const total = lista.reduce((s,v) => s + v.total, 0);
+
+  $("#kVentas").textContent   = money(total);
+  $("#kClientes").textContent = lista.length;
+  $("#topVentas").textContent = money(total);
+  $("#estadoJornada").textContent = lista.length ? "Caja · " + hoyTexto() : "Caja";
+
+  const porProd = {};
+  lista.forEach(v => v.items.forEach(({id,q}) => porProd[id] = (porProd[id]||0)+q));
+
+  const tb = $("#tblProds");
+  tb.innerHTML = "";
+  PRODUCTOS.forEach(p => {
+    const q = porProd[p.id] || 0;
+    if(!q) return;
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>"+p.nombre+"</td>" +
+                   '<td class="r">'+q+"</td>" +
+                   '<td class="r">'+money(p.precio*q)+"</td>";
+    tb.appendChild(tr);
   });
-  setInterval(() => Sync.borrarViejas(), 10*60*1000);
+  if(!tb.children.length){
+    tb.innerHTML = '<tr><td colspan="3" style="color:var(--texto-suave);text-align:center;padding:22px">Todavía no hay ventas hoy</td></tr>';
+  }
+  cuadrarCaja();
 }
 
-/* ============================================================
-   Navegación y arranque
-   ============================================================ */
+function cuadrarCaja(){
+  const total = ventas.reduce((s,v) => s + v.total, 0);
+  const caja = parseFloat($("#caja").value);
+  const zona = $("#resCaja");
+  if(isNaN(caja)){ zona.innerHTML = ""; return; }
+  const dif = Math.round((caja - total)*100)/100;
+
+  if(Math.abs(dif) < 0.01){
+    zona.innerHTML = '<div class="aviso ok"><span>✓</span><span><b>Cuadra perfecto.</b> El efectivo coincide con lo cobrado.</span></div>';
+  } else if(dif < 0){
+    zona.innerHTML = '<div class="aviso crit"><span>⚠</span><span><b>Faltan '+money(-dif)+'.</b> Puede ser un vuelto mal dado o una venta que no se registró.</span></div>';
+  } else {
+    zona.innerHTML = '<div class="aviso warn"><span>⚠</span><span><b>Sobran '+money(dif)+'.</b> Probablemente una venta no quedó registrada.</span></div>';
+  }
+}
+
+let armadoCierre = false, tCierre = null;
+function cerrarJornada(){
+  if(!ventas.length){ toast("No hay ventas para cerrar"); return; }
+  const b = $("#btnCerrar");
+
+  if(!armadoCierre){
+    armadoCierre = true;
+    b.textContent = "Toca otra vez para confirmar";
+    clearTimeout(tCierre);
+    tCierre = setTimeout(() => {
+      armadoCierre = false;
+      b.textContent = "Cerrar jornada y guardar";
+    }, 4000);
+    return;
+  }
+
+  const caja = parseFloat($("#caja").value);
+  Sync.archivarJornada({
+    etiqueta: hoyTexto(),
+    fecha: new Date().toISOString().slice(0,10),
+    caja: isNaN(caja) ? null : caja
+  });
+  $("#caja").value = "";
+  armadoCierre = false;
+  b.textContent = "Cerrar jornada y guardar";
+  toast("Jornada guardada");
+}
+
+/* ---------------- navegación ---------------- */
 function irA(pane){
   $$(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.pane === pane)));
   $$(".pane").forEach(p => p.classList.toggle("on", p.id === "pane-"+pane));
   window.scrollTo(0,0);
-}
-
-function pintarTodo(){
-  pintarProductos();
-  pintarPedido();
-  pintarInventario();
-  pintarCierre();
-  pintarHistorial();
-  pintarEstadoGuardado();
 }
 
 $$(".tabs button").forEach(b => b.addEventListener("click", () => irA(b.dataset.pane)));
@@ -953,28 +638,28 @@ $("#btnCobrar").addEventListener("click", cobrar);
 $("#btnLimpiar").addEventListener("click", () => { pedido = {}; $("#paga").value=""; pintarPedido(); pintarProductos(); });
 $("#btnDeshacer").addEventListener("click", deshacer);
 $("#btnCerrar").addEventListener("click", cerrarJornada);
-$("#btnExportar").addEventListener("click", exportar);
 $("#paga").addEventListener("input", calcularVuelto);
 $("#caja").addEventListener("input", cuadrarCaja);
-$("#btnRespaldo").addEventListener("click", descargarRespaldo);
-$("#btnRestaurar").addEventListener("click", () => $("#archivoRespaldo").click());
-$("#archivoRespaldo").addEventListener("change", e => {
-  if(e.target.files && e.target.files[0]) restaurarRespaldo(e.target.files[0]);
-  e.target.value = "";
-});
 
-/* Aviso antes de cerrar si hay un pedido a medio armar */
 window.addEventListener("beforeunload", e => {
   if(Object.keys(pedido).length){ e.preventDefault(); e.returnValue = ""; }
 });
 
-/* Service worker: solo funciona servido por http/https, no con el archivo suelto.
-   Es lo que permite que la app abra sin internet una vez instalada. */
-if("serviceWorker" in navigator && location.protocol.startsWith("http")){
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => { /* sin SW igual funciona */ });
+if(window.Sync){
+  Sync.iniciar({
+    onOrdenes:    pintarOrdenes,
+    onInventario: recibirInventario,
+    onVentas:     pintarVentas,
+    onEstado:     pintarConexion
   });
+  setInterval(() => Sync.borrarViejas(), 10*60*1000);
 }
 
-pintarTodo();
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+
+pintarProductos();
+pintarPedido();
+pintarAvisoStock();
 </script>
