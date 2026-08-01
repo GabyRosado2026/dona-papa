@@ -1,15 +1,18 @@
 /* Doña Papa — service worker
-   Guarda la app en el teléfono para que abra sin internet.
-   Sube el número de CACHE cada vez que cambies index.html. */
-const CACHE = "donapapa-v2";
+   Guarda las apps en el teléfono para que abran sin internet.
+   IMPORTANTE: sube el número de CACHE cada vez que cambies
+   cualquier archivo, o los teléfonos siguen mostrando lo viejo. */
+const CACHE = "donapapa-v3";
 const ARCHIVOS = [
   "./",
   "./index.html",
   "./cocina.html",
+  "./dueno.html",
   "./config.js",
   "./sync.js",
-  "./manifest-cocina.json",
   "./manifest.json",
+  "./manifest-cocina.json",
+  "./manifest-dueno.json",
   "./icon-192.png",
   "./icon-512.png"
 ];
